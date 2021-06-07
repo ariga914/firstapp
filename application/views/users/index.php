@@ -18,7 +18,7 @@
                   <td><?php echo $user["last_name"]; ?></td>
                   <td>
                       <a href="#"><button class="btn btn-primary btn-sm">View</button></a>
-                      <a href="#"><button class="btn btn-outline-primary btn-sm">Edit</button></a>
+					  <a href="<?php echo site_url("users/update/$user[id]"); ?>"><button class="btn btn-outline-primary btn-sm">Edit</button></a>
                       <button class="btn btn-sm">Delete</button>
                   </td>
                   </tr>

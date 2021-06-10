@@ -13,14 +13,15 @@ class Users extends CI_Controller {
 
     public function index()
     {
-        // Use method get_users of user model to get users list
+        $this->load->helper('form');
+		// Use method get_users of user model to get users list
         $data["users"] = $this->users_model->get_users();
 
         // declaring page_title variable
         $data["page_title"] = "List Of Users";
 
 
-        $this->load->view('header'); 
+        $this->load->view('header', $data); 
 
         // assign users list to view
         $this->load->view('users/index', $data);
@@ -37,6 +38,7 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('first_name', 'First name', 'required');
         $this->form_validation->set_rules('last_name', 'Last name', 'required');
         $this->form_validation->set_rules('email', 'Email', array('required','valid_email'));
+		$this->form_validation->set_rules('phone_number', 'Phone number', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('header', $data); 
@@ -59,6 +61,8 @@ class Users extends CI_Controller {
 		$this->form_validation->set_rules('first_name', 'First name', 'required');
 		$this->form_validation->set_rules('last_name', 'Last name', 'required');
 		$this->form_validation->set_rules('email', 'Email', array('required','valid_email'));
+		$this->form_validation->set_rules('phone_number', 'Phone number', 'required');
+
 		if ($this->form_validation->run() === FALSE) {
 			$this->load->view('header', $data); 
 			$this->load->view('users/update', $data);
@@ -75,4 +79,33 @@ class Users extends CI_Controller {
 		redirect(base_url('/'));
 	}
 
+	public function view()
+	{
+		/**
+		 *  showing user's all information
+		 * @access public
+		 */
+
+		// Use method get_users of user model to get users list
+        $data["users"] = $this->users_model->get_users();
+		  // declaring page_title variable
+		$data["page_title"] = "information of Users";
+
+		$this->load->view('header', $data); 
+        // assign users list to view
+        $this->load->view('users/view', $data);
+        $this->load->view('footer');
+	}
+
+	public function all_delete()
+	{
+		/**
+		 *  deleting all the selected users
+		 * @access public
+		 */
+
+		$selected_users = $this->input->post('user_ids');
+		$this->users_model->all_delete_users($selected_users);
+		redirect(base_url('/'));
+	}
 }

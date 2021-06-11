@@ -16,7 +16,7 @@
                 <label for="email">Email</label>
                 <input type="text" class="form-control" name="email" id="email" value="<?php echo $user->email; ?>">
             </div>
-			<div class="form-group">
+            <div class="form-group">
                 <label for="phone_number">Email</label>
                 <input type="text" class="form-control" name="phone_number" id="phone_number" value="<?php echo $user->phone_number; ?>">
             </div>

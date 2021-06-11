@@ -79,7 +79,7 @@ class Users extends CI_Controller {
 		redirect(base_url('/'));
 	}
 
-	public function view()
+	public function view($user_id)
 	{
 		/**
 		 *  showing user's all information
@@ -87,7 +87,7 @@ class Users extends CI_Controller {
 		 */
 
 		// Use method get_users of user model to get users list
-        $data["users"] = $this->users_model->get_users();
+        $data["user"] = $this->users_model->get_user($user_id);
 		  // declaring page_title variable
 		$data["page_title"] = "information of Users";
 
@@ -104,8 +104,8 @@ class Users extends CI_Controller {
 		 * @access public
 		 */
 
-		$selected_users = $this->input->post('user_ids');
-		$this->users_model->all_delete_users($selected_users);
+		$selected_user_ids = $this->input->post('user_ids');
+		$this->users_model->all_delete_users($selected_user_ids);
 		redirect(base_url('/'));
 	}
 }
